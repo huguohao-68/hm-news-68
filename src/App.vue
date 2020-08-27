@@ -5,7 +5,7 @@
 </template>
 <script>
 export default {
-  data() {}
+  // data() {}
 }
 </script>
 <style lang="less"></style>
