@@ -22,7 +22,7 @@ export default {
 <style lang="less">
 .hm-header {
   height: 50px;
-  border: bottom 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
   display: flex;
   text-align: center;
   line-height: 50px;
