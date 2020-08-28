@@ -19,17 +19,31 @@
         :rules="rules.password"
       />
       <div style="margin: 16px;">
-        <van-button round block type="info" native-type="submit">提交</van-button>
+        <van-button round block type="info" native-type="submit"
+          >提交</van-button
+        >
       </div>
     </van-form>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   methods: {
-    login() {
-      console.log('登录')
+    async login() {
+      const res = await axios.post('http://localhost:3000/login', {
+        username: this.username,
+        password: this.password
+      })
+      console.log(res.data)
+      const { statusCode, message } = res.data
+      if (statusCode === 200) {
+        this.$toast.success(message)
+        this.$router.push('/user')
+      } else {
+        this.$toast.fail('登录失败')
+      }
     }
   },
   data() {
