@@ -71,6 +71,9 @@ export default {
       const { statusCode, message } = res.data
       if (statusCode === 200) {
         this.$toast.success(message)
+        this.$router.push('/login')
+      } else {
+        this.$toast.fail(message)
       }
     }
   }
