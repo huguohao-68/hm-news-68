@@ -32,11 +32,17 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
+
 export default {
+  created() {
+    console.log(this.$route)
+    this.username = this.$route.params.username
+    this.password = this.$route.params.password
+  },
   methods: {
     async login() {
-      const res = await axios.post('http://localhost:3000/login', {
+      const res = await this.$axios.post('/login', {
         username: this.username,
         password: this.password
       })
@@ -77,7 +83,7 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
 .tips {
   padding: 15px;
   font-size: 16px;

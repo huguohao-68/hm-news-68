@@ -14,7 +14,7 @@
         :rules="rules.password"
       />
       <div style="margin: 16px;">
-        <van-button block type="info" native-type="submit">注册</van-button>
+        <van-button  round block type="info" native-type="submit">注册</van-button>
       </div>
 
       <p class="tips">
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   data() {
     return {
@@ -67,11 +67,20 @@ export default {
   methods: {
     async register() {
       console.log('注册')
-      const res = await axios.post('http://localhost:3000/register', this.user)
+      const res = await this.$axios.post('/register', this.user)
+      console.log(res)
       const { statusCode, message } = res.data
       if (statusCode === 200) {
         this.$toast.success(message)
-        this.$router.push('/login')
+        // this.$router.push(`/login?username=${this.user.username}&password=${this.user.password}`)
+        this.$router.push({
+          name: 'login',
+          params: {
+            username: this.user.username,
+            password: this.user.password
+            // this.user
+          }
+        })
       } else {
         this.$toast.fail(message)
       }
@@ -80,4 +89,17 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="less" scoped>
+// scoped的原理:
+//1.给当前的模板里所有的元素添加一个特殊的属性:data-v-xxx
+//2.给当前的模板里所有的选择器早增加一个属性选择器
+//  div[data-v-xxxx] .tips[data-v-xxxx]
+.tips {
+  padding: 15px;
+  font-size: 16px;
+  text-align: right;
+  a {
+    color: orange;
+  }
+}
+</style>
