@@ -23,6 +23,10 @@
           >提交</van-button
         >
       </div>
+      <p class="tips">
+        没有账号？去
+        <router-link to="/register">注册</router-link>
+      </p>
     </van-form>
   </div>
 </template>
@@ -73,4 +77,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="less">
+.tips {
+  padding: 15px;
+  font-size: 16px;
+  text-align: right;
+  a {
+    color: orange;
+  }
+}
+</style>
