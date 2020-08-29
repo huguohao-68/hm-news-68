@@ -4,18 +4,8 @@
     <hm-logo></hm-logo>
 
     <van-form @submit="register">
-      <van-field
-        v-model="user.username"
-        label="账号"
-        placeholder="请输入你的账号"
-        :rules="rules.username"
-      />
-      <van-field
-        v-model="user.nickname"
-        label="昵称"
-        placeholder="请输入你的昵称"
-        :rules="rules.nickname"
-      />
+      <van-field v-model="user.username" label="账号" placeholder="请输入你的账号" :rules="rules.username" />
+      <van-field v-model="user.nickname" label="昵称" placeholder="请输入你的昵称" :rules="rules.nickname" />
       <van-field
         v-model="user.password"
         type="password"
@@ -24,19 +14,19 @@
         :rules="rules.password"
       />
       <div style="margin: 16px;">
-        <van-button block type="info" native-type="submit">
-          注册
-        </van-button>
+        <van-button block type="info" native-type="submit">注册</van-button>
       </div>
 
       <p class="tips">
-        已有账号？去<router-link to="/login">登录</router-link>
+        已有账号？去
+        <router-link to="/login">登录</router-link>
       </p>
     </van-form>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -75,8 +65,13 @@ export default {
     }
   },
   methods: {
-    register() {
-      console.log(1)
+    async register() {
+      console.log('注册')
+      const res = await axios.post('http://localhost:3000/register', this.user)
+      const { statusCode, message } = res.data
+      if (statusCode === 200) {
+        this.$toast.success(message)
+      }
     }
   }
 }
