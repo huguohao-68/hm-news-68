@@ -10,6 +10,7 @@ import 'vant/lib/index.css'
 import 'amfe-flexible'
 import HmHeader from './components/HmHeader.vue'
 import HmLogo from './components/HmLogo.vue'
+import HmNavItem from './components/HmNavItem.vue'
 import axios from 'axios'
 
 // 把axios挂载到vue的原型
@@ -19,6 +20,7 @@ axios.defaults.baseURL = 'http://localhost:3000'
 
 Vue.component('hm-logo', HmLogo)
 Vue.component('hm-header', HmHeader)
+Vue.component('hm-navitem', HmNavItem)
 Vue.use(Vant)
 Vue.config.productionTip = false
 
