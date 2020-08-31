@@ -12,8 +12,12 @@
 export default {
   methods: {
     clickFn() {
-      console.log(1)
+      console.log(this.to)
+      this.$router.push(this.to)
     }
+  },
+  props: {
+    to: String
   }
 }
 </script>

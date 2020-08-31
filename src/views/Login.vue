@@ -36,7 +36,7 @@
 
 export default {
   created() {
-    console.log(this.$route)
+    // console.log(this.$route)
     this.username = this.$route.params.username
     this.password = this.$route.params.password
   },
@@ -46,9 +46,13 @@ export default {
         username: this.username,
         password: this.password
       })
-      console.log(res.data)
-      const { statusCode, message } = res.data
+      // console.log(res.data)
+      const { statusCode, message, data } = res.data
       if (statusCode === 200) {
+        // 先要保存token
+        // 在跳转至个人中心
+        localStorage.setItem('token', data.token)
+        localStorage.setItem('userId', data.user.id)
         this.$toast.success(message)
         this.$router.push('/user')
       } else {
