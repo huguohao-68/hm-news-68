@@ -32,6 +32,9 @@
       <template #content>文章/视频</template>
     </hm-navitem>
     <hm-navitem to='/edit'>设置</hm-navitem>
+    <div style="margin:15px">
+      <van-button  type="primary" block @click="logout">退出</van-button>
+    </div>
   </div>
 </template>
 
@@ -41,6 +44,7 @@ export default {
     base() { return this.$axios.defaults.baseURL }
 
   },
+
   data() {
     return {
       user: ''
@@ -60,12 +64,34 @@ export default {
     if (statusCode === 200) {
       this.user = data
     }
-    // else if (statusCode === 401) {
-    //   this.$toast('用户验证失败')
-    //   this.$router.push('/login')
-    //   localStorage.removeItem('token')
-    //   localStorage.removeItem('userId')
-    // }
+  },
+  methods: {
+    async logout() {
+      // 弹框提示
+      try {
+        await this.$dialog.confirm({
+          title: '温馨提示',
+          message: '滚不滚?'
+        })
+      } catch {
+        return this.$toast({
+          message: '取消退出',
+          position: 'bottom'
+        })
+        // Toast({
+        //   message: '底部展示',
+        //   position: 'bottom'
+        // })
+      }
+      // 说明点了确定
+      localStorage.removeItem('token')
+      localStorage.removeItem('userId')
+      this.$router.push('/login')
+      this.$toast({
+        message: '退出成功',
+        position: 'bottom'
+      })
+    }
   }
 }
 </script>
