@@ -12,9 +12,12 @@
 export default {
   methods: {
     clickFn() {
-      console.log(this.to)
+      // console.log(this.to)
       this.$router.push(this.to)
+      // 这句话是为了可以注册组件的点击事件
+      this.$emit('click')
     }
+
   },
   props: {
     to: String

@@ -21,7 +21,7 @@ axios.defaults.baseURL = 'http://localhost:3000'
 // 现在给axuos配置拦截器
 axios.interceptors.request.use(function(config) {
   // config代表请求信息
-  console.log('拦截到了请求', config)
+  // console.log('拦截到了请求', config)
   const token = localStorage.getItem('token')
   if (token) {
     config.headers.Authorization = token
@@ -30,7 +30,7 @@ axios.interceptors.request.use(function(config) {
 })
 
 axios.interceptors.response.use(function(response) {
-  console.log('拦截到了响应', response)
+  // console.log('拦截到了响应', response)
   const { statusCode, message } = response.data
   if (statusCode === 401 && message === '用户信息验证失败') {
     // 需要三个操作

@@ -66,7 +66,7 @@ export default {
   },
   methods: {
     async register() {
-      console.log('注册')
+      // console.log('注册')
       const res = await this.$axios.post('/register', this.user)
       // console.log(res)
       const { statusCode, message } = res.data
