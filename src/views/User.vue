@@ -19,11 +19,11 @@
           <span class="iconfont iconjiantou1"></span>
       </div>
     </div>
-    <hm-navitem to="/follow">
+    <hm-navitem to="/myfollow">
       <template>我的关注</template>
       <template #content>关注的内容</template>
     </hm-navitem>
-    <hm-navitem>
+    <hm-navitem to='/mycomment'>
       <template>我的跟帖</template>
       <template #content>跟帖/回复</template>
     </hm-navitem>
