@@ -4,7 +4,7 @@ import Login from '../views/Login.vue'
 import Register from '../views/Register.vue'
 import User from '../views/User.vue'
 import UserEdit from '../views/UserEdit.vue'
-
+import Demo from '../views/Demo.vue'
 Vue.use(VueRouter)
 
 // 处理全局push异常
@@ -17,7 +17,8 @@ const routes = [
   { path: '/login', component: Login, name: 'login' },
   { path: '/register', component: Register, name: 'register' },
   { path: '/user', component: User, name: 'user' },
-  { path: '/user-edit', component: UserEdit, name: 'user' }
+  { path: '/user-edit', component: UserEdit, name: 'user' },
+  { path: '/demo', component: Demo, name: 'demo' }
 ]
 
 const router = new VueRouter({

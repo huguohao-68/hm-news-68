@@ -1,6 +1,6 @@
 <template>
   <div class='user'>
-    <div class="header">
+    <div class="header" @click="$router.push('/user-edit')">
       <div class="avater">
           <img :src="base + user.head_img" alt="">
             <!-- <img src="../assets/24.jpg" alt=""> -->
