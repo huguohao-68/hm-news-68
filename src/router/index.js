@@ -5,8 +5,9 @@ import Register from '../views/Register.vue'
 import User from '../views/User.vue'
 import UserEdit from '../views/UserEdit.vue'
 import Demo from '../views/Demo.vue'
-import MyFollow from '../views/MyFollow'
-import MyComment from '../views/MyComment'
+import MyFollow from '../views/MyFollow.vue'
+import MyComment from '../views/MyComment.vue'
+import MyStar from '../views/MyStar.vue'
 Vue.use(VueRouter)
 
 // 处理全局push异常
@@ -22,7 +23,8 @@ const routes = [
   { path: '/user-edit', component: UserEdit, name: 'user' },
   { path: '/demo', component: Demo, name: 'demo' },
   { path: '/myfollow', component: MyFollow, name: 'myfollow' },
-  { path: '/mycomment', component: MyComment, name: 'mycomment' }
+  { path: '/mycomment', component: MyComment, name: 'mycomment' },
+  { path: '/mystar', component: MyStar, name: 'mystar' }
 
 ]
 
@@ -43,7 +45,7 @@ router.beforeEach(function(to, from, next) {
   // next()
   const token = localStorage.getItem('token')
   // 可能拦截的页面比较多可以放在一个数组里面
-  const authUrls = ['/user', '/user-edit', '/myfollow', '/mycomment']
+  const authUrls = ['/user', '/user-edit', '/myfollow', '/mycomment', '/mystar']
   // 获取token  判断不是去user或者有通行证token都允许执行,不满足条件直接返回登录界面
   if (!authUrls.includes(to.path) || token) {
     next()

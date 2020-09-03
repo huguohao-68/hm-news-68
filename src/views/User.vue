@@ -27,8 +27,8 @@
       <template>我的跟帖</template>
       <template #content>跟帖/回复</template>
     </hm-navitem>
-    <hm-navitem>
-      <template>我的收藏</template>
+    <hm-navitem to='/mystar'>
+      <template >我的收藏</template>
       <template #content>文章/视频</template>
     </hm-navitem>
     <hm-navitem to='/user-edit'>设置</hm-navitem>
