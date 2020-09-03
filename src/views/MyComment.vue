@@ -2,6 +2,12 @@
   <div class="mycomment">
       <hm-header>我的评论</hm-header>
       <div class="list">
+        <van-list
+            v-model="loading"
+            :finished="finished"
+            finished-text="没有更多了"
+            @load="onLoad"
+            >
           <div class="item" v-for="item in commentList" :key='item.id'>
               <div class="time">{{item.create_date | time('YYYY-MM-DD HH:mm')}}</div>
               <div class="comment"  v-if="item.parent">
@@ -13,8 +19,9 @@
               <span class="one-txt-cut">原文: {{item.post.title}}</span>
               <span class="iconfont iconjiantou1"></span>
           </div>
+         </div>
+         </van-list>
       </div>
-       </div>
   </div>
 </template>
 
@@ -23,7 +30,9 @@ export default {
   data() {
     return {
       commentList: [],
-      list: []
+      list: [],
+      pageIndex: 1,
+      pageSize: 5
     }
   },
   created() {
@@ -31,7 +40,13 @@ export default {
   },
   methods: {
     async  getCommentList() {
-      const res = await this.$axios.get('/user_comments')
+      const res = await this.$axios.get('/user_comments', {
+        params: {
+          // get请求的参数需要可以通过params进行传递
+          pageIndex: this.pageIndex,
+          pageSize: this.pageSize
+        }
+      })
       console.log(res.data)
       const { statusCode, data } = res.data
       if (statusCode === 200) {
