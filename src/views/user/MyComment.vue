@@ -84,8 +84,6 @@ export default {
     },
     onRefresh() {
       console.log(' 下拉刷新中...')
-      // 清空列表数据
-
       setTimeout(() => {
         /*
         1. 下拉刷新时需要清除原来的数据,和网页刷新类似
