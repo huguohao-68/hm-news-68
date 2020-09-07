@@ -54,7 +54,14 @@ export default {
         localStorage.setItem('token', data.token)
         localStorage.setItem('userId', data.user.id)
         this.$toast.success(message)
-        this.$router.push('/user')
+        // 跳转到个人中心
+        // this.$router.push('/user')
+        // this.$router.back()
+        if (this.$route.query.back) {
+          this.$router.back()
+        } else {
+          this.$router.push('/user')
+        }
       } else {
         this.$toast.fail('登录失败')
       }
