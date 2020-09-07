@@ -92,6 +92,10 @@ export default {
       console.log(res)
       const { statusCode, data } = res.data
       if (statusCode === 200) {
+        // 防止暴力点击
+        if (this.pageIndex === 1) {
+          this.newsList = []
+        }
         this.newsList = [...this.newsList, ...data]
         console.log(this.newsList)
         this.loading = false
