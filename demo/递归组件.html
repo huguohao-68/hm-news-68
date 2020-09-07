@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .demo {
+                border: 1px solid #ccc;
+                padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div>{{msg}}Vue的简单递归组件实例</div>
+        <hr>
+         <demo :count='1'></demo>
+    </div>
+    <script src="../../vue.js"></script>
+    <script>
+        // 全局注册实现递归
+        // Vue.component('demo',{
+        //     template:`
+        //         <div class='demo'>
+        //         <h3>这是个demo组件</h3>
+        //         <demo></demo>  
+        //         </div>  
+        //     `
+        // })
+        const vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'你好啊,这是'
+            },
+            components:{
+               
+                demo:{
+                    // 递归组件,直接死递归
+                    // 
+                props:{
+                count:Number
+                    },
+                name:'demo',
+                template:`
+                <div>
+               
+                <div class='demo'>
+                <h3>{{count}}这是个demo组件</h3>
+                </div>
+                <demo  :count='count+1' v-if='Math.random()>0.3'></demo> 
+                </div>
+                
+                `
+                }
+            }
+        })
+    </script>
+</body>
+</html> 

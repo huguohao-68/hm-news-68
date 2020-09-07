@@ -10,7 +10,7 @@
         </div>
         <div class="right">回复</div>
     </div>
-    <hm-floor class="first" :comment='comment.parent' v-if='comment.parent'> </hm-floor>
+    <hm-floor :count='count' :comment='comment.parent' v-if="comment.parent"></hm-floor>
     <div class="content">{{comment.content}}</div>
   </div>
 
@@ -20,6 +20,20 @@
 export default {
   props: {
     comment: Object
+  },
+  data() {
+    return {
+      count: this.getCount(0, this.comment)
+    }
+  },
+  methods: {
+    getCount(num, data) {
+      if (data.parent) {
+        return this.getCount(num + 1, data.parent)
+      } else {
+        return num
+      }
+    }
   }
 }
 </script>

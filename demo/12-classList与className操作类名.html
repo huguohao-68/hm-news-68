@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="aa bb"></div>
+  <script>
+    // classList 操作dom对象的各种属性
+    //  add 增加  remove删除  toggle 切换  contains 判断
+    // 给div添加一个 cc 类名
+    var div = document.querySelector('div')
+    // div.className = 'aa bb cc'
+    // // 删除bb类名
+    // div.className = 'aa'
+
+    // console.log(div.classList)
+    // 添加类
+    div.classList.add('cc')
+    // 删除类
+    div.classList.remove('bb')
+    // 判断是否有哪个类名
+    console.log(div.classList.contains('bb'))
+    // 切换类名
+    div.classList.toggle('dd')
+    div.classList.toggle('dd')
+  </script>
+</body>
+</html>
