@@ -33,9 +33,15 @@ const routes = [
   { path: '/post-detail/:id', component: PostDetail, name: 'post-detail' }
 
 ]
-
+// history:
+// 缺点：地址栏带有 # 不美观
+// 优点：使用方便，不需要服务器额外的处理
+// hash：
+// 优点： 地址栏好看，，更像真实的url地址，不带有#
+// 缺点：在项目打包上线的时候，需要服务器额外的处理。 apache node nginx      linux
 const router = new VueRouter({
-  routes
+  routes,
+  mode: 'history'
 })
 // 配置全局的导航守卫
 // to:从哪里来  from: 到哪里去  next: 函数 代表是否放行

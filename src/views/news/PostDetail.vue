@@ -35,16 +35,27 @@
       <div class="comment-list">
            <h3>精彩跟帖</h3>
            <!-- :comment='comment' 将具体的评论内容渲染给comment -->
-           <hm-comment :comment='comment' v-for="comment in  commentList" :key="comment.id">组件</hm-comment>
+           <hm-comment
+           :comment='comment'
+            v-for="comment in
+            commentList"
+            :key="comment.id"
+            @reply='onreply'
+            >组件</hm-comment>
        </div>
-       <div class="foot">
+        <div class="footer-textarea" v-if="isShowTextArea">
+         <textarea  @blur="onBlur" name="" id="" ref="textarea"   :placeholder="'回复:@'+nickname" v-model="content"></textarea>
+         <van-button type="primary" @click="publish">发送</van-button>
+       </div>
+       <div class="footer-input" v-else>
          <div class="search">
-           <input type="text" placeholder='回复'>
+           <input type="text" placeholder='回复'  @focus="onFocus">
          </div>
-         <div class="iconfont iconpinglun-"><i>99</i></div>
+         <div class="iconfont iconpinglun-"><i>{{post.comment_length}}</i></div>
          <div class="iconfont iconshoucang" @click="star" :class="{now: post.has_star}" ></div>
          <div class="iconfont iconfenxiang "></div>
        </div>
+
   </div>
 </template>
 
@@ -55,7 +66,11 @@ export default {
       post: {
         user: {}
       },
-      commentList: []
+      commentList: [],
+      isShowTextArea: false,
+      content: '',
+      nickname: '',
+      replyId: ''
     }
   },
   created() {
@@ -63,7 +78,27 @@ export default {
     this.getInfo()
     // 获取评论列表
     this.getCommentList()
+    // this.$bus.$on('reply', this.onreply)
+    this.$bus.$on('reply', async(id, nickname) => {
+      console.log('bus', id, nickname)
+      this.isShowTextArea = true
+      await this.$nextTick()
+      // 焦点
+      this.$refs.textarea.focus()
+      // 下面显示@+昵称
+      this.nickname = nickname
+      this.replyId = id
+      console.log(nickname, id)
+    })
   },
+  // destroyed() {
+  //   console.log('detail销毁')
+  //   // 移除$bus的自定义事件off
+  //   // this.$bus.$off() 移除bus上所有的事件
+  //   // this.$bus.$off('reply') 移除bus上所有的reply事件
+  //   // this.$bus.$off('reply', this.onReply) 移除bus上 一个reply事件，，，对应的这个函数就是需要移除的
+  //   this.$bus.$off('reply', this.onReply)
+  // },
   methods: {
     noLogin() {
       // 判断是否登陆
@@ -166,6 +201,50 @@ export default {
       if (statusCode === 200) {
         this.commentList = data
         console.log(this.commentList)
+      }
+    },
+    async onFocus() {
+      this.isShowTextArea = true
+      await this.$nextTick()
+      // 让textarea自动获取焦点
+      console.log(this.$refs.textarea)
+      this.$refs.textarea.focus()
+    },
+    async publish() {
+      const res = await this.$axios.post(`/post_comment/${this.post.id}`, {
+        content: this.content,
+        parent_id: this.replyId
+      })
+      console.log(res)
+      const { statusCode, message } = res.data
+      if (statusCode === 200) {
+        this.$toast.success(message)
+        this.getCommentList()
+        this.content = ''
+        this.nickname = ''
+        this.replyId = ''
+        this.isShowTextArea = false
+      }
+    },
+    async onreply(id, nickname) {
+      console.log('父组件', id, nickname)
+      this.isShowTextArea = true
+      await this.$nextTick()
+      // 焦点
+      this.$refs.textarea.focus()
+      // 下面显示@+昵称
+
+      this.nickname = nickname
+      this.replyId = id
+      console.log(nickname, id)
+    },
+    onBlur() {
+      // 失去焦点取消文本域输入框
+      console.log('触发了blur事件')
+      if (!this.content) {
+        this.isShowTextArea = false
+        this.nickname = ''
+        this.replyId = ''
       }
     }
   }
@@ -271,7 +350,7 @@ export default {
   }
 
 }
-.foot{
+.footer-input{
   background-color: #fff;
   width: 100%;
   height: 50px;
@@ -315,6 +394,28 @@ export default {
       font-size: 14px;
       padding-left: 20px;
     }
+  }
+}
+.footer-textarea {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  position: fixed;
+  z-index: 999;
+  bottom: 0;
+  padding: 10px;
+  align-items: flex-end;
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+  justify-content: space-around;
+  textarea {
+    width: 260px;
+    height: 80px;
+    background-color: #ccc;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+    font-size: 14px;
   }
 }
 </style>

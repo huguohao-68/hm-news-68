@@ -43,6 +43,7 @@
 <script>
 // iconjiantou8
 export default {
+  name: 'index',
   data() {
     return {
       active: 0,
@@ -58,7 +59,11 @@ export default {
     }
   },
   created() {
+    console.log('index创建')
     this.getTabList()
+  },
+  destroyed() {
+    console.log('index销毁')
   },
   methods: {
     async getTabList() {

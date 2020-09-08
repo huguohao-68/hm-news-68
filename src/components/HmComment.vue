@@ -8,9 +8,9 @@
           <p>1.{{comment.user.nickname}}</p>
           <p>{{comment.create_date | now  }}</p>
         </div>
-        <div class="right">回复</div>
+        <div class="right" @click="reply">回复</div>
     </div>
-    <hm-floor :count='count' :comment='comment.parent' v-if="comment.parent"></hm-floor>
+    <hm-floor @reply='onReply' :count='count' :comment='comment.parent' v-if="comment.parent"></hm-floor>
     <div class="content">{{comment.content}}</div>
   </div>
 
@@ -33,6 +33,15 @@ export default {
       } else {
         return num
       }
+    },
+    reply() {
+      // console.log(this.comment.id, this.comment.user.nickname)
+      // this.$emit('reply', this.comment.id, this.comment.user.nickname)
+      this.$bus.$emit('reply', this.comment.id, this.comment.user.nickname)
+    },
+    onReply(id, nickname) {
+      // console.log(id, nickname)
+      this.$emit('reply', id, nickname)
     }
   }
 }
