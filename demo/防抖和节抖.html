@@ -1,11 +1,58 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-    
+  <input type="text">
+  <script>
+    // 函数防抖(debounce)： 一个函数需要在延迟一段时间后才会执行，但是如果在这个时间内，这个函数有触发了，需要重新计时。 
+    // 函数节流(throttle)： 一个函数在规定的时间内只能触发一次，无论点击了多少次，也只能触发一次
+    // var input = document.querySelector('input')
+    // var timer = null
+    // input.oninput = function () {
+    //   clearInterval(timer)
+    //   timer = setTimeout(() => {
+    //     console.log(input.value)
+    //   }, 1000)
+    // }
+    // 函数防抖:在函数执行的时候,不会立马执行会延迟一段时间执行(比如一秒),在一秒的时间内函数如果又被触发了,延时时会重新计时从一秒开始
+    // 可以以参考回城被打断
+//        var input = document.querySelector('input')
+//        var timer=null
+//        input.oninput =function(){
+//            clearTimeout(timer)
+//            timer = setTimeout(()=>{
+//             console.log(input.value)
+//        },1000)
+//    }
+
+    // var input = document.querySelector('input')
+    // var flag = true
+    // input.oninput = function () {
+    //   if (flag) {
+    //     flag = false
+    //     console.log(input.value)
+    //     setTimeout(() => {
+    //       flag = true
+    //     }, 1000)
+    //   } 
+    // }
+
+    //函数节流: 规定了一个函数在规定时间内只能执行一次,其他时间无论触发了多少次.都不会生效
+    var input = document.querySelector('input')
+    var flag =true
+    input.oninput =function(){
+        if(flag){
+            flag= false
+            console.log(input.value)
+            setTimeout(() => {
+            flag=true
+        }, 1000)
+    }
+ }
+  </script>
 </body>
 </html>

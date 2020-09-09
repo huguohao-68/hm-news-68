@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text">
+    <script src="../node_modules/lodash/lodash.js"></script>
+    <script>
+        // _.random(参数1,参数2)
+        // lodash的随机数方法.范围在参数1和参数2之间
+        // console.log(_.random(1,5))
+        //   // lodash的保留小数方法.参数2是保留几位
+        // console.log(_.round(4.55367,2))
+
+
+        //    防抖函数 _.debounce(fn,time)
+        // fn是防抖的函数，time是防抖的时间
+        // var input =  document.querySelector('input')
+        // function fn(){
+        //     console.log(input.value)
+        // }
+        // var  newfn = _.debounce(fn,1000)
+        //      input.oninput=newfn
+// 连写:  
+// _.throttle节流    _.debounce防抖
+             input.oninput = _.throttle(function() {
+              console.log(this.value)
+            }, 500)
+    </script>
+</body>
+</html>

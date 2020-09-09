@@ -11,6 +11,7 @@ import MyStar from '../views/user/MyStar.vue'
 import Index from '../views/news/Index.vue'
 import Manage from '../views/news/Manage.vue'
 import PostDetail from '../views/news/PostDetail.vue'
+import Search from '../views/news/Search'
 Vue.use(VueRouter)
 
 // 处理全局push异常
@@ -30,7 +31,8 @@ const routes = [
   { path: '/mystar', component: MyStar, name: 'mystar' },
   { path: '/', component: Index, name: 'index' },
   { path: '/manage', component: Manage, name: 'manage' },
-  { path: '/post-detail/:id', component: PostDetail, name: 'post-detail' }
+  { path: '/post-detail/:id', component: PostDetail, name: 'post-detail' },
+  { path: '/search', component: Search, name: 'search' }
 
 ]
 // history:
