@@ -1,17 +1,32 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../views/user/Login.vue'
-import Register from '../views/user/Register.vue'
-import User from '../views/user/User.vue'
-import UserEdit from '../views/user/UserEdit.vue'
-import Demo from '../views/user/Demo.vue'
-import MyFollow from '../views/user/MyFollow.vue'
-import MyComment from '../views/user/MyComment.vue'
-import MyStar from '../views/user/MyStar.vue'
-import Index from '../views/news/Index.vue'
-import Manage from '../views/news/Manage.vue'
-import PostDetail from '../views/news/PostDetail.vue'
-import Search from '../views/news/Search'
+// import Login from '../views/user/Login.vue'
+// import Register from '../views/user/Register.vue'
+// import User from '../views/user/User.vue'
+// import UserEdit from '../views/user/UserEdit.vue'
+// import Demo from '../views/user/Demo.vue'
+// import MyFollow from '../views/user/MyFollow.vue'
+// import MyComment from '../views/user/MyComment.vue'
+// import MyStar from '../views/user/MyStar.vue'
+// import Index from '../views/news/Index.vue'
+// import Manage from '../views/news/Manage.vue'
+// import PostDetail from '../views/news/PostDetail.vue'
+// import Search from '../views/news/Search'
+// Chunk:枪克
+// webpackChunkName:模块化打包
+const Login = () => import(/* webpackChunkName: "user" */'../views/user/Login.vue')
+const Register = () => import(/* webpackChunkName: "user" */'../views/user/Register.vue')
+const User = () => import(/* webpackChunkName: "user" */'../views/user/User.vue')
+const UserEdit = () => import(/* webpackChunkName: "user" */'../views/user/UserEdit.vue')
+const Demo = () => import(/* webpackChunkName: "user" */'../views/user/Demo.vue')
+const MyFollow = () => import(/* webpackChunkName: "user" */'../views/user/MyFollow.vue')
+const MyComment = () => import(/* webpackChunkName: "user" */'../views/user/MyComment.vue')
+const MyStar = () => import(/* webpackChunkName: "user" */'../views/user/MyStar.vue')
+const Index = () => import(/* webpackChunkName: "index" */'../views/news/Index.vue')
+const Manage = () => import(/* webpackChunkName: "new" */'../views/news/Manage.vue')
+const PostDetail = () => import(/* webpackChunkName: "new" */'../views/news/PostDetail.vue')
+const Search = () => import(/* webpackChunkName: "new" */'../views/news/Search.vue')
+// 到这一步,使用history模式.服务器没有做配置的情况下,页面会发生404错误
 Vue.use(VueRouter)
 
 // 处理全局push异常
@@ -43,7 +58,8 @@ const routes = [
 // 缺点：在项目打包上线的时候，需要服务器额外的处理。 apache node nginx      linux
 const router = new VueRouter({
   routes,
-  mode: 'history'
+  // mode: 'history'
+  mode: 'hash'
 })
 // 配置全局的导航守卫
 // to:从哪里来  from: 到哪里去  next: 函数 代表是否放行

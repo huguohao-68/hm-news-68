@@ -2,7 +2,7 @@
   <div class='user'>
     <div class="header" @click="$router.push('/user-edit')">
       <div class="avater">
-          <img :src="base + user.head_img" alt="">
+          <img :src="$base + user.head_img" alt="">
             <!-- <img src="../assets/24.jpg" alt=""> -->
       </div>
       <div class="info">
@@ -40,10 +40,10 @@
 
 <script>
 export default {
-  computed: {
-    base() { return this.$axios.defaults.baseURL }
+  // computed: {
+  //   base() { return this.$axios.defaults.baseURL }
 
-  },
+  // },
 
   data() {
     return {
